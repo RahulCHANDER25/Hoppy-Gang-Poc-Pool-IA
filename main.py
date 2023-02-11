@@ -22,7 +22,7 @@ pacman = AgentPacman(env)
 state = env.reset()
 
 all_rewards = []
-print(pacman.q_table)
+# print(pacman.q_table)
 for t in range(EPOCHS):
     state = env.reset()
     done = False
@@ -30,7 +30,6 @@ for t in range(EPOCHS):
     while done != True:
         action = pacman.get_greedy_epsilon_action(state)
         new_state, reward, done, infos = env.step(action)
-        # print(reward)
         if infos['lives'] != live:
             live -= 1
             reward = -50
@@ -40,7 +39,7 @@ for t in range(EPOCHS):
         pacman.update_q_table(new_state, state, reward, action)
         state = new_state
     if t % 10 == 0:
-        print(np.mean(all_rewards))
+        print(np.mean(all_rewards), pacman.epsilon)
         all_rewards = []
 
 env.close()

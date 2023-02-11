@@ -23,7 +23,7 @@ class AgentPacman():
         self.q_table = np.zeros([210 * 160, space.action_space.n])
 
     def get_greedy_epsilon_action(self, state):
-        self.epsilon = max(self.epsilon * 0.995, 0.2)
+        self.epsilon = max(self.epsilon * 0.999995, 0.2)
         is_a_greedy_action = random.random() > self.epsilon
         if is_a_greedy_action:
             action = np.argmax(self.q_table[state])
