@@ -20,7 +20,7 @@ class AgentPacman():
 
     def __init__(self, space) -> None:
         self.epsilon = 1.0
-        self.q_table = np.zeros([210*160, space.action_space.n])
+        self.q_table = np.zeros([210 * 160, space.action_space.n])
 
     def get_greedy_epsilon_action(self, state):
         self.epsilon = max(self.epsilon * 0.995, 0.2)
@@ -35,4 +35,4 @@ class AgentPacman():
         estimate_value = np.max(self.q_table[new_state[:,:,0]])
         new_value = reward + GAMMA * estimate_value
         temp_diff = new_value - self.q_table[state[:,:,0]][action]
-        self.q_table[state[:,:,0]][action] = self.q_table[state[:,:,0]][action] + LR * temp_diff
+        self.q_table[state[:, :, 0]][action] = self.q_table[state[:, :, 0]][action] + LR * temp_diff
