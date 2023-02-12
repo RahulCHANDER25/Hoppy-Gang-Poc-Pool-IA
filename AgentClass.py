@@ -6,11 +6,11 @@
 ## Class Neural Network
 ##
 
-import torch
-import torchvision
-import pandas
+# import torch
+# import torchvision
+# import pandas
 import numpy as np
-import matplotlib as plt
+# import matplotlib as plt
 import random
 
 GAMMA = 0.99
@@ -23,12 +23,21 @@ class AgentPacman():
         self.q_table = np.zeros([210 * 160, space.action_space.n])
 
     def get_greedy_epsilon_action(self, state):
-        self.epsilon = max(self.epsilon * 0.999995, 0.2)
+        self.epsilon = max(self.epsilon * 0.9995, 0.2)
         is_a_greedy_action = random.random() > self.epsilon
         if is_a_greedy_action:
             action = np.argmax(self.q_table[state])
         else:
-            action = random.randint(0, 8)
+            action = random.randint(1, 4)
+        return action
+
+    def get_greedy_epsilon_action_best(self, state):
+        self.epsilon = max(self.epsilon * 0.9995, 0.2)
+        is_a_greedy_action = random.random() > self.epsilon
+        if is_a_greedy_action:
+            action = np.argmax(self.q_table[state])
+        else:
+            action = random.randint(1, 4)
         return action
 
     def update_q_table(self, new_state, state, reward, action):
